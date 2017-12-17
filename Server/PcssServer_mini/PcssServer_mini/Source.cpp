@@ -58,8 +58,9 @@ int main() {
 
 	freeaddrinfo(result);
 
-	if (listen(ListenSocket, SOMAXCONN) == SOCKET_ERROR) {
-		printf("Listen failed with error: %ld\n", WSAGetLastError());
+	iResult = listen(ListenSocket, SOMAXCONN);
+	if (iResult == SOCKET_ERROR) {
+		printf("listen failed with error: %d\n", WSAGetLastError());
 		closesocket(ListenSocket);
 		WSACleanup();
 		return 1;
