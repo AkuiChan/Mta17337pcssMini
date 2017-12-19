@@ -4,19 +4,25 @@
 
 #pragma comment(lib, "Ws2_32.lib")
 
+#define DEFAULT_BUFLEN 512
+#define DEFAULT_PORT "17337"
+
 int main() {
 	WSADATA wsaData;
 
-	int iResult;
+	char recvbuf[DEFAULT_BUFLEN];
+	int iSendResult, iResult;
+	int recvbuflen = DEFAULT_BUFLEN;
 
+	SOCKET ListenSocket = INVALID_SOCKET;
+	SOCKET ClientSocket = INVALID_SOCKET;
+	
 	// Initialize Winsock
 	iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
 	if (iResult != 0) {
 		printf("WSAStartup failed: %d\n", iResult);
 		return 1;
 	}
-
-#define DEFAULT_PORT "17337"
 
 	struct addrinfo *result = NULL, *ptr = NULL, hints;
 
@@ -33,8 +39,6 @@ int main() {
 		WSACleanup();
 		return 1;
 	}
-
-	SOCKET ListenSocket = INVALID_SOCKET;
 
 	// Create a SOCKET for the server to listen for client connections
 	ListenSocket = socket(result->ai_family, result->ai_socktype, result->ai_protocol);
@@ -66,9 +70,44 @@ int main() {
 		return 1;
 	}
 
-	SOCKET ClientSocket;
+	while (true) {
+		ClientSocket = accept(ListenSocket, NULL, NULL);
 
+		if (ClientSocket == INVALID_SOCKET) {
+			printf("accept failed: %d\n", WSAGetLastError());
+			closesocket(ListenSocket);
+			WSACleanup();
+			return 1;
+		}
+	}
 
+	// Receive until the peer shuts down the connection
+	do {
+
+		iResult = recv(ClientSocket, recvbuf, recvbuflen, 0);
+		if (iResult > 0) {
+			printf("Bytes received: %d\n", iResult);
+
+			// Echo the buffer back to the sender
+			iSendResult = send(ClientSocket, recvbuf, iResult, 0);
+			if (iSendResult == SOCKET_ERROR) {
+				printf("send failed: %d\n", WSAGetLastError());
+				closesocket(ClientSocket);
+				WSACleanup();
+				return 1;
+			}
+			printf("Bytes sent: %d\n", iSendResult);
+		}
+		else if (iResult == 0)
+			printf("Connection closing...\n");
+		else {
+			printf("recv failed: %d\n", WSAGetLastError());
+			closesocket(ClientSocket);
+			WSACleanup();
+			return 1;
+		}
+
+	} while (iResult > 0);
 
 	return 0;
 }
