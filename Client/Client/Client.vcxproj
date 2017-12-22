@@ -20,9 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{B47226B3-0B0A-4E8E-9157-28CEBCCE5656}</ProjectGuid>
+    <ProjectGuid>{F670CBCD-B982-40CC-9E75-884C94BEADE5}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>PcssClientmini</RootNamespace>
+    <RootNamespace>Client</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
