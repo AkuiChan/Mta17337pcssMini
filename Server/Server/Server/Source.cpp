@@ -12,14 +12,19 @@ SOCKET Connections[100];
 int ConnectionCounter = 0;
 
 void ClientHandlerThread(int index) {
-	char buffer[256];
+	int bufferlength;
 	while (true) {
-		recv(Connections[index], buffer, sizeof(buffer), NULL);
+		recv(Connections[index], (char*)&bufferlength, sizeof(int), NULL);
+		char * buffer = new char[bufferlength];
+		recv(Connections[index], buffer, bufferlength, NULL);
 		for (int i = 0; i < ConnectionCounter; i++) {
 			if (i == index)
 				continue;
-			send(Connections[i], buffer, sizeof(buffer), NULL);
+			send(Connections[i], (char*)&bufferlength, sizeof(int), NULL);
+			send(Connections[i], buffer, bufferlength, NULL);
 		}
+		delete[] buffer;
+
 	}
 }
 
@@ -35,7 +40,7 @@ int main() {
 
 	SOCKADDR_IN addr;
 	int addrlen = sizeof(addr);
-	addr.sin_addr.s_addr = inet_addr("192.168.38.182");
+	addr.sin_addr.s_addr = inet_addr("100.72.27.76");
 	addr.sin_port = htons(17337);
 	addr.sin_family = AF_INET;
 
@@ -53,8 +58,10 @@ int main() {
 
 		else {
 			cout << "Client number " << i + 1 << " connected!" << endl;
-			char MOTD[256] = "Welcome! This is the message of the day"; //MAAAAAAA
-			send(newConnection, MOTD, sizeof(MOTD), NULL);
+			string MOTD = "Welcome! This is the message of the day"; //MAAAAAAA
+			int MOTDLength = MOTD.size();
+			send(newConnection, (char*)&MOTDLength, sizeof(int), NULL);
+			send(newConnection, MOTD.c_str(), MOTDLength, NULL);
 			Connections[i] = newConnection;
 			ConnectionCounter++;
 			CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)ClientHandlerThread, (LPVOID)(i), NULL, NULL);
