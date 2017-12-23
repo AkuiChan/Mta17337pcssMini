@@ -7,12 +7,12 @@ CLIENT TODO:
  - Chatroom name
 
 SERVER TODO:
- - Number of clients online (server) 
+ - Number of clients online
        - Who's joined/left
        
 UNSPEC/BOTH TODO:
  - Who's online
- - Use string instead of char -mitch _Still open
+ - Use string instead of char (needs to be revised.)
  - Appearance of the chatroom
  
 Watch Videos -Niko & Kat & Bikki
