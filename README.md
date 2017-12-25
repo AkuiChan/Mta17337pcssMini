@@ -2,20 +2,20 @@
 The repository for the group MTA17337 mini-project submission. 
 
 Figure out how to:
- - Tickets - 
+ - Tickets - https://github.com/wp-e-commerce/wp-e-commerce/wiki/Creating-issue-tickets
  - Wiki documentation - https://help.github.com/articles/about-github-wikis/
  - Source code versioning - The act of documenting the updates in the code. Often named with numbers. (e.g. minecraft updates 1.4.XXX)
  
  Fix:
  - Spam
- - Names?
+ - Names BK
  - extra?
  - When two people write to each other at the same time, the texts of both users will be merged together, when one of the users press ENTER.
- - Find the IP of the computer Automaticly. 
+ - Find the IP of the computer automatically. BK (paused)
  
  Do:
- - Pdf writting
- - Make comments on Server and Client - Niko, BK
+ - Pdf writing
+ - Make comments on Server and Client - Niko (Ongoing), BK (done)
 
 
 //-------------This is the Initial Describtion of how to use the program. Remeber to edit before delivery-------------//
