@@ -10,6 +10,7 @@ Figure out how to:
  - Spam
  - Names?
  - extra?
+ - When two people write to each other at the same time, the texts of both users will be merged together, when one of the users press ENTER.
  
  Do:
  - Pdf writting
