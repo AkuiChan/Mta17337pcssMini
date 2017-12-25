@@ -8,10 +8,10 @@ Figure out how to:
  
  Fix:
  - Spam
- - Names?
+ - Names BK
  - extra?
  - When two people write to each other at the same time, the texts of both users will be merged together, when one of the users press ENTER.
- - Find the IP of the computer Automaticly. BK
+ - Find the IP of the computer automatically. BK (paused)
  
  Do:
  - Pdf writing
