@@ -11,11 +11,11 @@ Figure out how to:
  - Names?
  - extra?
  - When two people write to each other at the same time, the texts of both users will be merged together, when one of the users press ENTER.
- - Find the IP of the computer Automaticly. 
+ - Find the IP of the computer Automaticly. BK
  
  Do:
  - Pdf writting
- - Make comments on Server and Client - Niko, BK
+ - Make comments on Server and Client - Niko (Ongoing), BK (done)
 
 
 //-------------This is the Initial Describtion of how to use the program. Remeber to edit before delivery-------------//
