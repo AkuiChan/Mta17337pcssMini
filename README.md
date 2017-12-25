@@ -14,7 +14,7 @@ Figure out how to:
  - Find the IP of the computer Automaticly. BK
  
  Do:
- - Pdf writting
+ - Pdf writing
  - Make comments on Server and Client - Niko (Ongoing), BK (done)
 
 
