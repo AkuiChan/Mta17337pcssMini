@@ -7,10 +7,10 @@ Figure out how to:
  - Source code versioning - The act of documenting the updates in the code. Often named with numbers. (e.g. minecraft updates 1.4.XXX)
  
  Fix:
- - Spam BK
- - Names BK (done)
+ - Spam - BK (done)
+ - Names - BK (done)
  - extra?
- - When two people write to each other at the same time, the texts of both users will be merged together, when one of the users press ENTER.
+ - When two people write to each other at the same time, the texts of both users will be merged together, when one of the users press ENTER - BK
  - Find the IP of the computer automatically. BK (paused)
  
  Do:
