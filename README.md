@@ -1,7 +1,7 @@
-# Mta17337pcssMini
-The repository for the group MTA17337 mini-project submission. 
+# PCSS Mini-Project
+The repository for the group MTA17337 mini-project in Programming for Complex Software Systems. 
 
-//-------------This is the Initial Description of how to use the program. Remember to edit before delivery-------------//
+//-------------This is the initial description of how to use the program. Remember to edit before delivery-------------//
 
 This program is a multichat program, with multiple clients being able to connect under the same server.
 
