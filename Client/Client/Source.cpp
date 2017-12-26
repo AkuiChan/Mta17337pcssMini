@@ -11,6 +11,9 @@ SOCKET Connection;
 
 char buffer[256];										//Declares a buffer of chars
 
+char *name = new char[15];
+char *message = new char[200];
+
 void ClientThread() {									//Checks for messages from the server
 	while (true) {
 		recv(Connection, buffer, sizeof(buffer), NULL);	//Receives messages from the server
@@ -30,7 +33,7 @@ int main() {
 	//Create Socket
 	SOCKADDR_IN addr;									//Specifies a transport address and port for the AF_INET address family
 	int sizeofaddr = sizeof(addr);						//Size of the structure addr
-	addr.sin_addr.s_addr = inet_addr("192.168.38.1");	//IP address
+	addr.sin_addr.s_addr = inet_addr("192.168.38.182");	//IP address
 	addr.sin_port = htons(17337);						//Port
 	addr.sin_family = AF_INET;							//IPv4
 
@@ -40,14 +43,21 @@ int main() {
 		MessageBoxA(NULL, "Failed to connect", "ERROR!", MB_OK | MB_ICONERROR); //Shows a window error message
 		return 0;							
 	}
-	cout << "Connected" << endl;						//If connected to Server
+
+	//Name of Client
+	cout << "What's your name?" << endl;
+	cin >> name;
 
 	//Multithreading
 	CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)ClientThread, NULL, NULL, NULL); //Creates a thread which runs the ClientThread function
-							
+
 	//Input from Client
 	while (true) {
 		cin.getline(buffer, sizeof(buffer));			//Enables input from client
+
+		strcat_s(buffer, " wrote ");
+		strcat_s(buffer, name);
+
 		send(Connection, buffer, sizeof(buffer), NULL);	//Sends the message to the server
 		Sleep(10);										//Sleeps for 10ms
 	}
