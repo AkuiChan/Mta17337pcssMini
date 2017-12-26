@@ -7,8 +7,8 @@ Figure out how to:
  - Source code versioning - The act of documenting the updates in the code. Often named with numbers. (e.g. minecraft updates 1.4.XXX)
  
  Fix:
- - Spam
- - Names BK
+ - Spam BK
+ - Names BK (done)
  - extra?
  - When two people write to each other at the same time, the texts of both users will be merged together, when one of the users press ENTER.
  - Find the IP of the computer automatically. BK (paused)
@@ -18,7 +18,7 @@ Figure out how to:
  - Make comments on Server and Client - Niko (Ongoing), BK (done)
 
 
-//-------------This is the Initial Describtion of how to use the program. Remeber to edit before delivery-------------//
+//-------------This is the Initial Description of how to use the program. Remeber to edit before delivery-------------//
 
 This program is a multichat program, with multiple clients being able to connect under the same server.
 
