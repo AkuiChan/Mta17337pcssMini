@@ -10,9 +10,8 @@ using namespace std;
 SOCKET Connection;
 
 char buffer[256];										//Declares a buffer of chars
-
-char *name = new char[15];
-char *message = new char[200];
+	
+char *name = new char[15];								//Buffer for name
 
 void ClientThread() {									//Checks for messages from the server
 	while (true) {
@@ -45,18 +44,18 @@ int main() {
 	}
 
 	//Name of Client
-	cout << "What's your name?" << endl;
-	cin >> name;
+	cout << "What's your name?" << endl;				//Asks the user to input the name
+	cin >> name;										//Input name into variable "name"
 
 	//Multithreading
 	CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)ClientThread, NULL, NULL, NULL); //Creates a thread which runs the ClientThread function
 
 	//Input from Client
 	while (true) {
-		cin.getline(buffer, sizeof(buffer));			//Enables input from client
+		cin.getline(buffer, sizeof(buffer));			//Enables input from client (Message)
 
-		strcat_s(buffer, " wrote ");
-		strcat_s(buffer, name);
+		strcat_s(buffer, " wrote ");					//Includes wrote behind the message. (message) "wrote"
+		strcat_s(buffer, name);							//Includes the inputted name behind wrote. (message) "wrote" (name)
 
 		send(Connection, buffer, sizeof(buffer), NULL);	//Sends the message to the server
 		Sleep(10);										//Sleeps for 10ms
