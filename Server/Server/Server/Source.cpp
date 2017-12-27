@@ -14,7 +14,9 @@ int ConnectionCounter = 0;								//An integer used to count the number of clien
 void ClientHandlerThread(int index) {
 	char buffer[256];
 	while (true) {
-		recv(Connections[index], buffer, sizeof(buffer), NULL);
+		int iResult = recv(Connections[index], buffer, sizeof(buffer), NULL);
+		if (iResult == SOCKET_ERROR)
+			continue;
 		for (int i = 0; i < ConnectionCounter; i++) {
 			if (i == index)
 				continue;
