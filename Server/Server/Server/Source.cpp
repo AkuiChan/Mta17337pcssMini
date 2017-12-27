@@ -23,7 +23,6 @@ void ClientHandlerThread(int index) {
 	}
 }
 
-//
 int main() {
 	WSAData wsaData;									//Structure that contains data about Windows Sockets.
 	WORD DllVersion = MAKEWORD(2, 2);					//Creates a 2 byte WORD value for use as a return value from a window procedure.
