@@ -19,14 +19,15 @@ void ClientThread() {									//Checks for messages from the server
 	//First message from the server
 	SetConsoleTextAttribute(hConsole, 10);				//Green Color
 	recv(Connection, buffer, sizeof(buffer), NULL);		//receive the first message from server
-	cout << buffer << endl;								//Print out the message
+	cout << "\r" << buffer << endl;								//Print out the message
 	
 	//Recieves chat messages from the server
 	while (true) {
 		recv(Connection, buffer, sizeof(buffer), NULL);	//Receives messages from the server
-		SetConsoleTextAttribute(hConsole, 9);
-		cout << buffer << endl;							//Prints out the message
-		SetConsoleTextAttribute(hConsole, 14);
+		SetConsoleTextAttribute(hConsole, 11);			//Cyan color
+		cout << "\r" << buffer << endl;					//Prints out the message
+		SetConsoleTextAttribute(hConsole, 14);			//Yellow Color
+		cout << "Me" << ": ";							//If the client is stuck in a cin, this will be used to re-cout Me
 	}
 }
 
@@ -65,7 +66,9 @@ int main() {
 
 	//Input from Client
 	while (true) {
-		SetConsoleTextAttribute(hConsole, 14);
+		Sleep(10);
+		SetConsoleTextAttribute(hConsole, 14);			//Yellow Color
+		cout << "\rMe" << ": ";							//Adds name before message
 		cin.getline(buffer, sizeof(buffer));			//Enables input from client (Message)
 
 		strcat_s(buffer, " wrote ");					//Includes wrote behind the message. (message) "wrote"
