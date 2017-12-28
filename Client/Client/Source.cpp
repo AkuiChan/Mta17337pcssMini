@@ -1,4 +1,5 @@
 //Client
+
 #define _WINSOCK_DEPRECATED_NO_WARNINGS					//Disables API warnings
 #pragma comment(lib, "ws2_32.lib")						//Linker to library
 
@@ -7,16 +8,25 @@
 
 using namespace std;
 
-SOCKET Connection;
+HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);		//Retrieves a handle for the standard output. This will be used late to change text colors
+SOCKET Connection;										//Create a socket object
 
 char buffer[256];										//Declares a buffer of chars
 	
 char *name = new char[15];								//Buffer for name
 
 void ClientThread() {									//Checks for messages from the server
+	//First message from the server
+	SetConsoleTextAttribute(hConsole, 10);				//Green Color
+	recv(Connection, buffer, sizeof(buffer), NULL);		//receive the first message from server
+	cout << buffer << endl;								//Print out the message
+	
+	//Recieves chat messages from the server
 	while (true) {
 		recv(Connection, buffer, sizeof(buffer), NULL);	//Receives messages from the server
+		SetConsoleTextAttribute(hConsole, 9);
 		cout << buffer << endl;							//Prints out the message
+		SetConsoleTextAttribute(hConsole, 14);
 	}
 }
 
@@ -32,7 +42,7 @@ int main() {
 	//Create Socket
 	SOCKADDR_IN addr;									//Specifies a transport address and port for the AF_INET address family
 	int sizeofaddr = sizeof(addr);						//Size of the structure addr
-	addr.sin_addr.s_addr = inet_addr("192.168.38.182");	//IP address
+	addr.sin_addr.s_addr = inet_addr("192.168.38.128");	//IP address
 	addr.sin_port = htons(17337);						//Port
 	addr.sin_family = AF_INET;							//IPv4
 
@@ -44,14 +54,18 @@ int main() {
 	}
 
 	//Name of Client
-	cout << "What's your name?" << endl;				//Asks the user to input the name
+	SetConsoleTextAttribute(hConsole, 10);				//Green color
+	cout << "______________________________________\n\n Name Selection for MTA17337's chat\n______________________________________\nName: ";//Asks the user to input the name
+	SetConsoleTextAttribute(hConsole, 14);				//Yellow color
 	cin >> name;										//Input name into variable "name"
+	system("cls");										//Clears the text in console
 
 	//Multithreading
 	CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)ClientThread, NULL, NULL, NULL); //Creates a thread which runs the ClientThread function
 
 	//Input from Client
 	while (true) {
+		SetConsoleTextAttribute(hConsole, 14);
 		cin.getline(buffer, sizeof(buffer));			//Enables input from client (Message)
 
 		strcat_s(buffer, " wrote ");					//Includes wrote behind the message. (message) "wrote"
