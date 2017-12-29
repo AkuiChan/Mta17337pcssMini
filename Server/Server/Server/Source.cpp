@@ -12,15 +12,15 @@ int ConnectionCounter = 0;								//An integer used to count the number of clien
 
 //Function called as a secondary thread; handles clients connected to the server.
 void ClientHandlerThread(int index) {
-	char buffer[256];
+	char buffer[256];									//every message can be no longer than 256 characters
 	while (true) {
-		int iResult = recv(Connections[index], buffer, sizeof(buffer), NULL);
+		int iResult = recv(Connections[index], buffer, sizeof(buffer), NULL); //recieve messages from clients
 		if (iResult == SOCKET_ERROR)
 			continue;
 		for (int i = 0; i < ConnectionCounter; i++) {
 			if (i == index)
 				continue;
-			send(Connections[i], buffer, sizeof(buffer), NULL);
+			send(Connections[i], buffer, sizeof(buffer), NULL); //send messages to clients
 		}
 	}
 }
@@ -38,7 +38,7 @@ int main() {
 	//Setting socket address values.
 	SOCKADDR_IN addr;									//Specifies endpoint address to which to connect a socket.
 	int addrlen = sizeof(addr);							//Interger value that holds the length of "addr".
-	addr.sin_addr.s_addr = inet_addr("192.168.38.182");	//Specifies the IP address of the socket.
+	addr.sin_addr.s_addr = inet_addr("127.0.0.1");		//Specifies the IP address of the socket.
 	addr.sin_port = htons(17337);						//Specifies the port of the socket.
 	addr.sin_family = AF_INET;							//Specifies the internet protocol family.
 
@@ -58,12 +58,12 @@ int main() {
 			cout << "Failed to accept the client's connection" << endl;
 		}
 		else {
-			cout << "Client number " << i + 1 << " connected!" << endl;
-			char MOTD[256] = "Welcome! This is the message of the day";
-			send(newConnection, MOTD, sizeof(MOTD), NULL);
-			Connections[i] = newConnection;
-			ConnectionCounter++;
-			CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)ClientHandlerThread, (LPVOID)(i), NULL, NULL);
+			cout << "Client number " << i + 1 << " connected!" << endl; // shows how many clients have conneceted in the server console
+			char MOTD[256] = "______________________________________\n \n Welcome to MTA17337's chat \n______________________________________"; //Message of the day
+			send(newConnection, MOTD, sizeof(MOTD), NULL); //Will send MOTD to the client after it connects
+			Connections[i] = newConnection;				//make a new connection in the connection Array
+			ConnectionCounter++;						//Increase ConnectionCounter to allow for more clients
+			CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)ClientHandlerThread, (LPVOID)(i), NULL, NULL); //Run clientHandler Thread
 		}
 	}
 
