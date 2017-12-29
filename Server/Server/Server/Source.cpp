@@ -12,15 +12,15 @@ int ConnectionCounter = 0;								//An integer used to count the number of clien
 
 //Function called as a secondary thread; handles clients connected to the server.
 void ClientHandlerThread(int index) {
-	char buffer[256];									//every message can be no longer than 256 characters
+	char buffer[256];															//Array holding the client's message. Can hold up to 256 characters.
 	while (true) {
-		int iResult = recv(Connections[index], buffer, sizeof(buffer), NULL); //recieve messages from clients
+		int iResult = recv(Connections[index], buffer, sizeof(buffer), NULL);	//Recieves the messages from clients.
 		if (iResult == SOCKET_ERROR)
 			continue;
 		for (int i = 0; i < ConnectionCounter; i++) {
 			if (i == index)
 				continue;
-			send(Connections[i], buffer, sizeof(buffer), NULL); //send messages to clients
+			send(Connections[i], buffer, sizeof(buffer), NULL);					//Sends the messages to all clients.
 		}
 	}
 }
@@ -38,7 +38,7 @@ int main() {
 	//Setting socket address values.
 	SOCKADDR_IN addr;									//Specifies endpoint address to which to connect a socket.
 	int addrlen = sizeof(addr);							//Interger value that holds the length of "addr".
-	addr.sin_addr.s_addr = inet_addr("127.0.0.1");		//Specifies the IP address of the socket.
+	addr.sin_addr.s_addr = inet_addr("127.0.0.1");		//Specifies the IP address of the socket. If set to "127.0.0.1", takes user's own local address.
 	addr.sin_port = htons(17337);						//Specifies the port of the socket.
 	addr.sin_family = AF_INET;							//Specifies the internet protocol family.
 
@@ -47,8 +47,8 @@ int main() {
 	bind(sListen, (SOCKADDR*)&addr, sizeof(addr));		//Associates address with the socket.
 	listen(sListen, SOMAXCONN);							//Places the socket in a state of listening for incoming connections.
 
-	//Prints text to the console. First thing that the user sees on-screen.
-	cout << "Server is online" << endl;
+	//Prints text to the Server console on startup.
+	cout << "Server is online." << endl;
 
 	//Looped function used to accept new connections. Can take up to 100 clients.
 	SOCKET newConnection;
@@ -58,12 +58,12 @@ int main() {
 			cout << "Failed to accept the client's connection" << endl;
 		}
 		else {
-			cout << "Client number " << i + 1 << " connected!" << endl; // shows how many clients have conneceted in the server console
-			char MOTD[256] = "______________________________________\n \n Welcome to MTA17337's chat \n______________________________________"; //Message of the day
-			send(newConnection, MOTD, sizeof(MOTD), NULL); //Will send MOTD to the client after it connects
-			Connections[i] = newConnection;				//make a new connection in the connection Array
-			ConnectionCounter++;						//Increase ConnectionCounter to allow for more clients
-			CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)ClientHandlerThread, (LPVOID)(i), NULL, NULL); //Run clientHandler Thread
+			cout << "Client number " << i + 1 << " connected!" << endl;																			//Prints text to the Server console when a new client connects and numbers them.
+			char MOTD[256] = "______________________________________\n \n Welcome to MTA17337's chat \n______________________________________";	//Message to be sent to the Client console when client connects.
+			send(newConnection, MOTD, sizeof(MOTD), NULL);																						//Sends message to the client's Client console.
+			Connections[i] = newConnection;																										//Creates a new socket in the socket array "Connections[]" for the client.
+			ConnectionCounter++;																												//Increase ConnectionCounter to count clients connected.
+			CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)ClientHandlerThread, (LPVOID)(i), NULL, NULL);										//Calls "clientHandlerThread".
 		}
 	}
 
