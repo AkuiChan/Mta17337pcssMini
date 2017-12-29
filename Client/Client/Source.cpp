@@ -78,6 +78,10 @@ int main() {
 		strcat_s(buffer, ": ");							//Sets a colon value between name and the message
 		strcat_s(buffer, message);						//Sets the message after the colon
 
+		if (message[0] == NULL) {						//Checks if there is a whitespace in the first letter. This is used to bypass a bug about sending a message when the client enters a name
+			continue;									//Resets the loop
+		}
+
 		send(Connection, buffer, sizeof(buffer), NULL);	//Sends the message to the server
 		Sleep(10);										//Sleeps for 10ms
 	}
