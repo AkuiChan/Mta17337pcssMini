@@ -14,6 +14,7 @@ SOCKET Connection;										//Create a socket object
 char buffer[256];										//Declares a buffer of chars
 	
 char *name = new char[15];								//Buffer for name
+char *message = new char[200];							//Buffer for message
 
 void ClientThread() {									//Checks for messages from the server
 	//First message from the server
@@ -43,7 +44,7 @@ int main() {
 	//Create Socket
 	SOCKADDR_IN addr;									//Specifies a transport address and port for the AF_INET address family
 	int sizeofaddr = sizeof(addr);						//Size of the structure addr
-	addr.sin_addr.s_addr = inet_addr("192.168.38.128");	//IP address
+	addr.sin_addr.s_addr = inet_addr("127.0.0.1");	//IP address
 	addr.sin_port = htons(17337);						//Port
 	addr.sin_family = AF_INET;							//IPv4
 
@@ -56,7 +57,7 @@ int main() {
 
 	//Name of Client
 	SetConsoleTextAttribute(hConsole, 10);				//Green color
-	cout << "______________________________________\n\n Name Selection for MTA17337's chat\n______________________________________\nName: ";//Asks the user to input the name
+	cout << "______________________________________\n\n Name Selection for MTA17337's chat\n______________________________________\nName: "; //Asks the user to input the name
 	SetConsoleTextAttribute(hConsole, 14);				//Yellow color
 	cin >> name;										//Input name into variable "name"
 	system("cls");										//Clears the text in console
@@ -66,13 +67,16 @@ int main() {
 
 	//Input from Client
 	while (true) {
-		Sleep(10);
+		Sleep(15);
 		SetConsoleTextAttribute(hConsole, 14);			//Yellow Color
 		cout << "\rMe" << ": ";							//Adds name before message
-		cin.getline(buffer, sizeof(buffer));			//Enables input from client (Message)
-
-		strcat_s(buffer, " wrote ");					//Includes wrote behind the message. (message) "wrote"
-		strcat_s(buffer, name);							//Includes the inputted name behind wrote. (message) "wrote" (name)
+		
+		cin.getline(message, sizeof(message));			//Enables input from client (Message)
+		
+		memset(buffer, 0, sizeof(buffer));				//Clears the values in the char array (buffer)
+		strcat_s(buffer, name);							//Sets values from name into buffer
+		strcat_s(buffer, ": ");							//Sets a colon value between name and the message
+		strcat_s(buffer, message);						//Sets the message after the colon
 
 		send(Connection, buffer, sizeof(buffer), NULL);	//Sends the message to the server
 		Sleep(10);										//Sleeps for 10ms
