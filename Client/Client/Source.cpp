@@ -14,7 +14,7 @@ SOCKET Connection;										//Create a socket object
 char buffer[256];										//Declares a buffer of chars
 	
 char *name = new char[15];								//Buffer for name
-char *message = new char[200];							//Buffer for message
+char message[200];										//Buffer for message
 
 void ClientThread() {									//Checks for messages from the server
 	//First message from the server
