@@ -4,6 +4,12 @@ This is the repository for the group MTA17337's mini-project in Programming for 
 ## Getting Started
 This program is a multichat program, with multiple clients being able to connect to the same server.
 
+To download the client and server
+```
+Step 1: On GitHub, click Release tab
+Step 2: Download Source code (zip) and unpack
+```
+
 To have different clients on more than one computer, you must first:
 ```
 Step 1: Open Command Prompt on the computer where the server will be run
