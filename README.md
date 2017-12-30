@@ -10,7 +10,7 @@ Step 1: On GitHub, click Release tab
 Step 2: Download Source code (zip) and unpack
 ```
 
-To have different clients on more than one computer, you must first:
+To have different clients on more than one computer, you must first change the following in visual studio:
 ```
 Step 1: Open Command Prompt on the computer where the server will be run
 Step 2: Run the following command: ipconfig
