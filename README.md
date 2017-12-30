@@ -14,7 +14,7 @@ Step 5: Replace 127.0.0.1 with the IPv4 address in the client in line 37
 ```
 Note that you might have to find the IPv4 address a different way if you're not using Windows.
 
-Open the server and wait for the message "Server is online" before trying to open any of the clients.
+Open the server and wait for the message "Server is online" before trying to opening the clients.
 
 ## Built With
 * Visual Studio in C++
