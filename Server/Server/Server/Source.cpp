@@ -15,11 +15,11 @@ void ClientHandlerThread(int index) {
 	char buffer[256];															//Array holding the client's message. Can hold up to 256 characters.
 	while (true) {
 		int iResult = recv(Connections[index], buffer, sizeof(buffer), NULL);	//Recieves the messages from clients.
-		if (iResult == SOCKET_ERROR)
-			continue;
-		for (int i = 0; i < ConnectionCounter; i++) {
-			if (i == index)
-				continue;
+		if (iResult == SOCKET_ERROR)											//If-statement that checks whether iResult is equal to SOCKET_ERROR.
+			continue;															//If the if-statement is triggered, the following for-loop won't be excecuted.
+		for (int i = 0; i < ConnectionCounter; i++) {							//For-loop that run through all connected clients.
+			if (i == index)														//If-statement that checks whether i is equal to index.
+				continue;														//If the if-statement is triggered, the following line won't be excecuted.
 			send(Connections[i], buffer, sizeof(buffer), NULL);					//Sends the messages to all clients.
 		}
 	}
@@ -52,10 +52,10 @@ int main() {
 
 	//Looped function used to accept new connections. Can take up to 100 clients.
 	SOCKET newConnection;
-	for (int i = 0; i < 100; i++) {
-		newConnection = accept(sListen, (SOCKADDR*)&addr, &addrlen);
-		if (newConnection == 0) {
-			cout << "Failed to accept the client's connection" << endl;
+	for (int i = 0; i < 100; i++) {													//For-loop that makes sure that no more than a 100 clients can connect to the server.
+		newConnection = accept(sListen, (SOCKADDR*)&addr, &addrlen);				//Accepts new clients and saves them to newConnection.
+		if (newConnection == 0) {													//If-statement that check whether newConnection is equal to 0.
+			cout << "Failed to accept the client's connection" << endl;				//Message printed to the server console if the if-statement is triggered.
 		}
 		else {
 			cout << "Client number " << i + 1 << " connected!" << endl;																			//Prints text to the Server console when a new client connects and numbers them.
