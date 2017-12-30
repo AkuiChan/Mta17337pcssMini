@@ -16,6 +16,18 @@ Note that you might have to find the IPv4 address a different way if you're not 
 
 Open the server and wait for the message "Server is online" before trying to open the clients.
 
+## Running Server and Client
+To run the server:
+```
+Step 1: Go to folder Server/Server/x64/Debug
+Step 2: Open the server application
+```
+To run the client:
+```
+Step 1: Go to folder Client/x64/Debug
+Step 2: Open the client application
+```
+
 ## Built With
 * Visual Studio in C++
 
