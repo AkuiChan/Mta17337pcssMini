@@ -20,7 +20,7 @@ void ClientThread() {									//Checks for messages from the server
 	//First message from the server
 	SetConsoleTextAttribute(hConsole, 10);				//Green Color
 	recv(Connection, buffer, sizeof(buffer), NULL);		//receive the first message from server
-	cout << "\r" << buffer << endl;								//Print out the message
+	cout << "\r" << buffer << endl;						//Print out the message
 	
 	//Recieves chat messages from the server
 	while (true) {
@@ -44,7 +44,7 @@ int main() {
 	//Create Socket
 	SOCKADDR_IN addr;									//Specifies a transport address and port for the AF_INET address family
 	int sizeofaddr = sizeof(addr);						//Size of the structure addr
-	addr.sin_addr.s_addr = inet_addr("127.0.0.1");	//IP address
+	addr.sin_addr.s_addr = inet_addr("127.0.0.1");		//IP address
 	addr.sin_port = htons(17337);						//Port
 	addr.sin_family = AF_INET;							//IPv4
 
