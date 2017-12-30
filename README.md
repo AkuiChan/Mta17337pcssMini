@@ -10,7 +10,7 @@ Step 1: Open Command Prompt on the computer where the server will be run
 Step 2: Run the following command: ipconfig
 Step 3: Find the IPv4 address
 Step 4: Replace 127.0.0.1 with the IPv4 address in the server in line 41
-Step 5: Replace 127.0.0.1 with the IPv4 address in the client in line 37
+Step 5: Replace 127.0.0.1 with the IPv4 address in the client in line 47
 ```
 Note that you might have to find the IPv4 address a different way if you're not using Windows.
 
