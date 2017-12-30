@@ -25,19 +25,21 @@ Open the server and wait for the message "Server is online" before trying to ope
 ## Running Server and Client
 To run the server:
 ```
+Do this the first time you open the server
 Step 1: Go to folder Server/Server
-Step 2: Open Server.sln and build
+Step 2: Open Server.sln and build and run
 
-The following steps are if you want to reopen the Server after building it once.
+Do this if you wish to open the server after building the first time
 Step 1: Go to folder Server/Server/x64/Debug
 Step 2: Open the server application
 ```
 To run the client:
 ```
+Do this the first time you open a Client
 Step 1: Go to folder Client
-Step 2: Open Client.sln and build
+Step 2: Open Client.sln and build and run
 
-The following steps are if you want to reopen the Client after building it once.
+Do this if you wish to open other clients or after building the first time
 Step 1: Go to folder Client/x64/Debug
 Step 2: Open the client application
 ```
